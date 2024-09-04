@@ -1,0 +1,38 @@
+Sort Colors (0s, 1s, 2s)
+
+bruteforce - inbuilt dn se sort karlo
+
+1st method - 
+
+cause only 3 elements hai unko store karlo with keyvalue using map ya bas variable a,b and c main aur aur loop run karo 
+0 to a => printing 0s
+a to b => printing 1s
+b to c => printing 2s
+
+2nd Method - Dutch National flag algorithm. 
+
+3 pointers lo - low,mid aur high
+array ke => 0 to low-1 main aaega 0s                                 Initially,puri list hi unsorted hai so wo mid se high-1 main aaegi
+            low to mid-1 main aaega 1s                               i.e. low = 0, mid = 0 and high = N-1
+            mid to high-1 is unsorted list                               3 conditions ->   while(low<=high)
+            high to N is 2's                                                     i. if arr[mid] == 0, swap(arr[low],arr[high]) and low++,mid++                         
+                                                                                 ii. if arr[mid] == 1, mid++  
+                                                                                 iii. if[mid] == 2, swap(arr[mid],arr[high]) and high--.
+void sortArray(vector<int>& arr, int n) {
+    int low = 0, mid = 0, high = n - 1; // 3 pointers                           
+    while (mid <= high) {        
+        if (arr[mid] == 0) {
+            swap(arr[low], arr[mid]);
+            low++;
+            mid++;
+        }
+        else if (arr[mid] == 1) {
+            mid++;
+        }
+        else {
+            swap(arr[mid], arr[high]);
+            high--;
+        }
+    }
+}                                                                                
+                                                                                
