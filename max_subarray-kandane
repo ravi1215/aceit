@@ -12,3 +12,5 @@ local sum = 0;
                       }
                   return maxsum;
 
+TC : O(N)
+
