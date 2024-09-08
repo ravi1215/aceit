@@ -26,3 +26,5 @@ idx = -1;
 
 
 TC : O(N)
+
+also ek stl fn hai next_permutation() karke jo direct answer de deta hai
