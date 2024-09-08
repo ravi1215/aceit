@@ -1,0 +1,29 @@
+#include <chrono>
+#include <mutex>
+so yaha isko karne ke 3 steps hai -
+
+idx = -1;
+
+1.) find breakpoint staring from end of array and i-- 
+      jaha arr[i] < arr[i+1]
+
+      for(i = n-2, i>=0 , i--)
+          if(arr[i] < arr[i+1]) 
+              idx = i;
+              break;
+    //edge case 
+     if(idx == -1) reverse(arr.begin(),arr.end())
+
+2.) ab uss breakpoint wali element i.e. arr[idx] se just bada element dundho on
+    right side, jo just bada ho par aus sabse smallest ho ans swap karo arr[idx] se aur 
+    remaining list ko reverse kardo
+
+    for(i = n-1, i>idx, i--)
+        if(arr[i] > arr[idx]){
+            swap(arr[idx], arr[i])
+        }
+
+    reverse(arr.begin()+idx+1, arr.end());
+
+
+TC : O(N)
