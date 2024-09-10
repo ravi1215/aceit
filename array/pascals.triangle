@@ -1,0 +1,66 @@
+1.) to calculate a number at r row and n column, use nCr formula where n = r-1 and r = c-1
+
+so this gives,  TC: O(c)
+
+ int nCr(int n, int r) {
+    long long res = 1;
+
+    for (int i = 0; i < r; i++) {
+        res = res * (n - i);
+        res = res / (i + 1);
+    }
+    return res;
+}
+
+    int element = nCr(r - 1, c - 1);
+    return element;
+
+2.) printing rth row main same above bas for loop laga do - O(N*R)
+     
+     for (int c = 1; c <= n; c++) {
+        cout << nCr(n - 1, c - 1) << " ";
+    }
+ 
+    OR,    TC : O(N)
+
+         logic ===>   Current element = prevElement * (rowNumber - colIndex) / colIndex
+  
+
+    int ans = 1;
+    cout << ans << " "; 
+
+    for (int i = 1; i < n; i++) {
+        ans = ans * (n - i);
+        ans = ans / i;
+        cout << ans << " ";
+    }
+    cout << endl;
+
+3.) printing all n rows- same optimal logic wala - O(N^2)
+
+   
+    long long ans = 1;
+    vector<int> ansRow;
+    ansRow.push_back(1); //inserting the 1st element
+
+    //calculate the rest of the elements:
+    for (int col = 1; col < row; col++) {
+        ans = ans * (row - col);
+        ans = ans / col;
+        ansRow.push_back(ans);
+    }
+    return ansRow;
+
+
+    vector<vector<int>> pascalTriangle(int n) {
+    vector<vector<int>> ans;
+
+    //store the entire pascal's triangle:
+    for (int row = 1; row <= n; row++) {
+        ans.push_back(generateRow(row));
+    }
+    return ans;
+    }
+  
+
+  other approaches use - recursion
