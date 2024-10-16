@@ -1,0 +1,35 @@
+isme pivot ke around array ko rotate kar diya jaata hai
+ex. [0,1,2,4,5,6,7] to [4,5,6,7,0,1,2] and target is 0, o/p = 4
+
+brute force -> for loop laga ke search kardo O(N)
+
+using binary search
+
+hum left sorted array aur right sorted array main search karenge
+
+TC: O(logN)
+
+while(low<=high){
+            int mid = low + (high - low) / 2;  
+
+            if(nums[mid] == target) return mid;
+
+            if(nums[low] <= nums[mid]){     // ye left side wala sorted array
+                if(nums[low] <= target && target < nums[mid]){
+                    high = mid-1;   // target left side wala sorted array main hai
+                }
+                else{
+                    low = mid+1; // left side ko skip kardo aur right side se dekho
+                }
+            }
+            else{ //  right side wala sorted array
+                if(nums[mid] < target && target <= nums[high]){ 
+                    low = mid+1;  //  target right side wala sorted array main hai
+                }
+                else{
+                    high = mid-1;  // right side ko skip kardo aur left side se dekho
+                }
+            }
+        }
+
+        return -1;
