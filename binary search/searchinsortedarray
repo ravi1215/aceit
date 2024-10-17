@@ -33,3 +33,7 @@ while(low<=high){
         }
 
         return -1;
+
+2nd variation sorted array 2 it asks if element exist return true else false 
+to isme ek edge case daal dena ki  if arr[low] == arr[mid] && arr[mid] == arr[high] to low++ and high-- 
+do this until 3 equal na rhe
