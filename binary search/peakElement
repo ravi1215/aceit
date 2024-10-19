@@ -1,0 +1,21 @@
+yaha peak element ka idx return karna
+
+edge cases -
+        if(n==1) return 0;
+        if(nums[0] > nums[1]) return 0;
+        if(nums[n-1] > nums[n-2]) return n-1;
+
+low = 1 aur high = n-2
+
+mid peak hoga agar
+   arr[mid] > arr[mid-1] && arr[mid] > arr[mid+1] return mid
+
+left side -
+   arr[mid] > arr [mid-1] -> low = mid+1;
+
+right side -
+   high = mid-1;
+
+   
+
+
