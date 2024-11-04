@@ -1,4 +1,4 @@
-follows min(max) pattern of binary search
+follows min(max) pattern of binary search  (HARD problem)
 
 range => [max element of arr, sum of arr];
 low =max(arr) and high = sum(arr)
