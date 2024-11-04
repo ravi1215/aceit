@@ -1,0 +1,31 @@
+follows min(max) or max(min) pattern   #Aggressive cows
+
+to hame stalls par cows ko place karna hai aise ki saari place ho jaaye aur minimum distance between any two cows maximum rhe
+using binary search iski range aaegi from -> [1, arr[max] - arr[min]] with min 2 cows to be placed
+
+1.) sort karo array
+2.) low = 1 and high = arr[n-1] - arr[0]
+
+ek boolean canweplace function checks if it is okay to place a cow
+by first placing the first cow at arr[0]
+
+bool canweplace(vector<int> &stalls,int distance,int cows){
+    int n = stalls.size();
+    int cowcnt = 1;
+    int last = stalls[0];
+    for(int i = 1; i<n; i++){
+      if (stalls[i] - last >= distance) {
+        cowcnt++;
+        last = stalls[i];
+      }
+      if(cowcnt >= cow) return true;
+    }
+    return false;
+}
+
+remaining code main if canweplace == true to low = mid+1 nhi to high = mid-1
+
+return high
+
+TC: O(NlogN) + O(N * log(max(stalls[])-min(stalls[])))
+SC: O(1)
