@@ -1,0 +1,34 @@
+follows min(max) pattern of binary search
+
+range => [max element of arr, sum of arr];
+low =max(arr) and high = sum(arr)
+
+make countstudent function ->
+
+int countstudents(vector<int>& arr, int mid){
+    int n = arr.size();
+    int student = 1;
+    int pagesStudent = 0;
+    for(int i = 0; i<n; i++){
+        if(pagesStudent + arr[i] <= mid){
+            pagesStudent += arr[i];
+        }
+        else{
+            student++;
+            pagesStudent = arr[i];
+        }
+    }
+    return student;
+}
+
+
+in bs
+
+ int students = countstudents(arr,mid);
+       if(students>m) low = mid+1;
+       else high = mid-1;  
+
+and return low haemsha
+
+TC: O(N * log(sum(arr[])-max(arr[])+1))
+sc: O(1)
