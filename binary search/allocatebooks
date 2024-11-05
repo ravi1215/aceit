@@ -1,4 +1,4 @@
-follows min(max) pattern of binary search  (HARD problem)
+follows min(max) pattern of binary search  (HARD problem) ==> exactly same Painter's Partition and Split Array - Largest Sum
 
 range => [max element of arr, sum of arr];
 low =max(arr) and high = sum(arr)
