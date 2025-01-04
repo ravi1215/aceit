@@ -1,0 +1,78 @@
+Input: s = "the sky is blue"
+Output: "blue is sky the"
+
+
+2 methods hai ->
+
+1. use stack - 
+
+string reverseWords(string s) {
+    stack<string> st;
+    string str = "";
+
+    // Process the input string
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] == ' ') {
+            if (!str.empty()) {  // Only push non-empty strings
+                st.push(str);
+                str = "";
+            }
+        } else {
+            str += s[i];
+        }
+    }
+
+    // Push the last word if it's non-empty
+    if (!str.empty()) {
+        st.push(str);
+    }
+
+    string ans = "";
+
+    // Build the reversed result
+    while (!st.empty()) {
+        ans += st.top();
+        st.pop();
+        if (!st.empty()) {  // Add space between words
+            ans += " ";
+        }
+    }
+    return ans;
+    }
+
+
+2. pointer
+
+string reverseWords(string s) {
+    int left = 0;
+    int right = s.length()-1;
+
+    //triming zeros
+    while (left <= right && s[left] == ' ') left++;
+    while (right >= left && s[right] == ' ') right--;
+    
+    string temp="";
+    string ans="";
+    
+    //Iterate the string and keep on adding to form a word
+    //If empty space is encountered then add the current word to the result
+    while (left <= right) {
+        char ch= s[left];
+        if (ch != ' ') {
+            temp += ch;
+        } else if (temp != "") {
+            if (ans!="") ans = temp + " " + ans;
+            else ans = temp;
+            temp = "";
+        }
+        left++;
+    }
+    
+    //If not empty string then add to the result(Last word is added)
+    if (temp!="") {
+        if (ans!="") ans = temp + " " + ans;
+        else ans = temp;
+    }
+    
+    return ans;    
+    }
