@@ -1,0 +1,57 @@
+#include <map>
+3 methoda hai -
+anagram example - 
+Input: s = "anagram", t = "nagaram"
+
+Output: true
+
+if(s.size() != t.size()) return false;
+
+1.) Sorting se   -   O(NlogN)
+ 
+        sort(s.begin(), s.end())
+        sort(t.begin(), t.end())
+        true agar s == t 
+
+2.) Hash Table   -   O(N)
+    
+        unordered_map<char,int> mp;
+        for(int i = 0; i<s.size(); i++){
+            mp[s[i]]++;
+        }
+        for(int i = 0; i<t.size(); i++){
+            mp[t[i]]--;
+        }
+
+        for(auto &entry : mp){
+            if(entry.second != 0){
+                return false;
+            }
+        }
+        return true;
+
+3.) Hash Table (ARRAY SE)   -   O(N)
+
+       int count[26] = {0};
+        
+        // Count the frequency of characters in string s
+        for (char x : s) {
+            count[x - 'a']++;
+        }
+        
+        // Decrement the frequency of characters in string t
+        for (char x : t) {
+            count[x - 'a']--;
+        }
+        
+        // Check if any character has non-zero frequency
+        for (int val : count) {
+            if (val != 0) {
+                return false;
+            }
+        }
+        
+        return true;
+
+  
+
