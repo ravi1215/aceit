@@ -1,0 +1,47 @@
+2 methods hai  -  
+
+1. Use stack pehle temp = head tak stack main insert karwa do 
+and phir temp = head banao aur phir compare karo value stack ke top ki temp ki value ke saath end of LL tak, bas space jyada lega
+
+TC = O(2N), ultimately representing O(N)
+SC = O(N)
+
+2. LL ko middle se tod do and 2nd half ko reverse krdo aur phir first half and second half ke head ko compare karte hue e=iterate karo jabtak second half null na ho jaaye.
+
+TC = O(2N), ultimately representing O(N)
+SC = O(1)
+
+ListNode* reverse(ListNode* head){
+        if(head == NULL || head->next == NULL) return head;
+        ListNode* newHead = reverse(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        return newHead;
+    }
+    
+    bool isPalindrome(ListNode* head) {
+        if(head == NULL || head->next == NULL) return true;
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast!=NULL && fast->next!=NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        ListNode* Newhead = reverse(slow);
+        ListNode* first = head;
+        ListNode* second = Newhead;
+
+        while(second != NULL){
+            if(first->val != second->val){
+                //reverse(Newhead);
+                return false;
+            }
+            first = first->next;
+            second = second->next;
+        }
+
+        //reverse(Newhead);
+        return true;
+    }
