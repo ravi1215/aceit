@@ -1,0 +1,50 @@
+Observation from the recursive tree =>
+
+1. Whenever we have count of open brackets equal to the count of close brackets, we have only one choice - that is to use '('. Because, all the brackets till now have been balanced. And we can not start a new sequence with ')'.
+2. Whenever, count of close bracket is 0, we can only use '('.
+3. Whenever, count of open bracket is 0, we can only use ')'.
+4. And for all the remaining cases, we have both the choices.
+
+We get an answer, when count of open == 0 and count of close == 0.
+
+TC: O(2^n) because we are doing two recursive calls in each case.
+SC: O(n) because we are storing the count of open and close brackets in the recursive call
+
+void solve(string op, int open, int close, vector<string> &ans){
+        if(open==0 && close==0){
+            ans.push_back(op);
+            return;
+        }
+        if(open == close){
+            string op1 = op;
+            op1.push_back('(');
+            solve(op1, open-1, close, ans);
+        }
+        else if(open == 0){
+            string op1 = op;
+            op1.push_back(')');
+            solve(op1, open, close-1, ans);
+        }
+        else if(close == 0){
+            string op1 = op;
+            op1.push_back('(');
+            solve(op1, open-1, close, ans);
+        }
+        else{
+            string op1 = op;
+            string op2 = op;
+            op1.push_back('(');
+            op2.push_back(')');
+            solve(op1, open-1, close, ans);
+            solve(op2, open, close-1, ans);
+        }
+    }
+
+    vector<string> generateParenthesis(int n) {
+        int open = n;
+        int close = n;
+        vector<string> ans;
+        string op = "";
+        solve(op,open,close,ans);
+        return ans;
+    }
