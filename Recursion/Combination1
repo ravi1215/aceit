@@ -1,0 +1,38 @@
+arr ke element ko jodd kar target ke equal banana hai and ek element unlimited times le sakte hai
+
+Apply recursion approach i.e. -
+
+ pick =>   findCombination(ind, target - arr[ind], arr, ans, ds);
+ not pick =>   findCombination(ind + 1, target, arr, ans, ds);
+
+ TC - O(2^n)
+
+ void findcomb(int idx, int target, vector<int>& candidates, vector<vector<int>>& ans,vector<int>& ds){
+        if(idx == candidates.size()){
+            if(target == 0){
+                ans.push_back(ds);
+            }
+            return;
+        }
+
+        // pick up the element 
+        if(idx < candidates.size() && candidates[idx] <= target){
+            ds.push_back(candidates[idx]);
+            findcomb(idx, target-candidates[idx], candidates, ans, ds);   // idx is not incremented and values can be reused
+            ds.pop_back();
+        }
+
+        findcomb(idx+1, target, candidates, ans, ds);
+    }
+
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> ds;
+        findcomb(0, target, candidates, ans, ds);
+        return ans;
+    }
+
+
+
+or sort karlena arr ko
