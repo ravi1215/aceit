@@ -1,0 +1,45 @@
+same as 1st one
+
+void generate(int idx, int target, vector<int>& candidates, vector<vector<int>>& ans, vector<int>& ds){
+        if(target == 0){
+            ans.push_back(ds);
+            return;
+        }
+
+        for (int i = idx; i < candidates.size(); i++) {
+            if (i > idx && candidates[i] == candidates[i - 1]) continue;  // add this condition to skip common values, ie to get unique combinations
+            if (candidates[i] > target) {
+                break;
+            }
+            ds.push_back(candidates[i]);
+            generate(i+1, target - candidates[i], candidates, ans, ds); 
+            ds.pop_back();
+        }
+
+    } 
+
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> ds;
+        sort(candidates.begin(), candidates.end());
+        generate(0, target, candidates, ans, ds);
+        return ans;
+    }
+
+Overall Time Complexity:
+
+Sorting:  O(nlogn) 
+Generating subsets: O(2^n) - worst case
+Copying subsets into ans: O(k* number of subsets)
+
+Total TC: O(nlogn + k*2^n) 
+
+
+Space Complexity:
+
+Recursive Stack Space: O(n)
+Temporary Data Structures: O(number of subsets*k)
+
+Overall Space Complexity: O(n + number of subsets*k)
+
+
