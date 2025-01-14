@@ -1,0 +1,31 @@
+MONOTONIC STACK
+
+vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+       unordered_map<int, int> mp;  // map for next greater element
+       stack<int> st;
+
+       for(int num : nums2){
+        while(!st.empty() && st.top() < num){  // Pop elements from stack and update map with next greater element
+            mp[st.top()] = num;
+            st.pop();
+        }
+        st.push(num);  // Push current element onto stack
+       }
+
+       for(int i = 0; i<nums1.size(); i++){
+        nums1[i] = mp.count(nums1[i]) ? mp[nums1[i]] : -1;  // Update element in nums1 with next greater element or -1
+       }
+
+       return nums1;
+    }
+
+
+Using stack with map
+We traverse nums2 once and push each element onto the stack. So, the time complexity of this step is O(m).
+For each element in nums1, we check if it has a next greater element in the map. The time complexity of this step is O(n).
+So, the overall time complexity is O(n+m).
+
+Using stack with map
+We use a stack to store the elements and a map to store the next greater elements. So, the space complexity is O(m+n), where m and n are the lengths of nums1 and nums2, respectively.
+
+
