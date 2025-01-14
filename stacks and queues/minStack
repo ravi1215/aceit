@@ -1,0 +1,72 @@
+pur logic is based on keeping a mini variable = INT-MAX
+
+Time Complexity: O(1)
+Space Complexity: O(N)
+
+logic code -
+
+ab pop ke time 
+
+ agar val < mini to
+       push => 2 * value * 1LL - mini
+       aur mini = val
+
+
+and pop ke time 
+
+ agar val < mini to
+       mini = 2 * mini - val
+
+
+and top main
+ agar topval < mini, mini ko return karna wo modified values hai;
+
+ 
+class MinStack {
+    stack<long long> st;
+    long long mini;
+public:
+    MinStack() {
+        while(st.empty() == false) st.pop();
+        mini = INT_MAX;
+    }
+    
+    void push(int val) {
+        long long value = val;
+        if(st.empty()){
+            mini = value;
+            st.push(value);
+        } else {
+            if(value < mini){
+                st.push(2 * value - mini);
+                mini = value;
+            } else {
+                st.push(value);
+            }
+        }
+    }
+    
+    void pop() {
+        if(st.empty()) return;
+        long long val = st.top();
+        st.pop();
+
+        if(val<mini){
+            mini = 2 * mini - val;
+        }
+    }
+    
+    int top() {
+        if(st.empty()) return -1;
+
+        long long ele = st.top();
+        if (ele < mini) return mini;
+        return ele;
+    }
+    
+    int getMin() {
+        return mini;
+    }
+};
+
+ 
