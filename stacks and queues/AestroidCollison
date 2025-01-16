@@ -1,0 +1,39 @@
+easy hai
+
+vector<int> asteroidCollision(vector<int>& asteroids) {
+        stack<int> st;
+
+    for (int a : asteroids) {
+        if (a > 0) {
+            // Push positive asteroids directly onto the stack
+            st.push(a);
+        } else {
+            // Process negative asteroids
+            while (!st.empty() && st.top() > 0 && st.top() < -a) {
+                // Pop smaller positive asteroids
+                st.pop();
+            }
+
+            if (st.empty() || st.top() < 0) {
+                // If the stack is empty or the top is negative, push the current negative asteroid
+                st.push(a);
+            } else if (!st.empty() && st.top() == -a) {
+                // If the top positive asteroid equals the negative asteroid in magnitude, destroy both
+                st.pop();
+            }
+        }
+    }
+
+    // Convert the stack to a vector in reverse order
+    vector<int> res(st.size());
+    int i = st.size() - 1;
+
+    while (!st.empty()) {
+        res[i--] = st.top();
+        st.pop();
+    }
+
+    return res;
+    }
+
+TC and SC : O(n)
