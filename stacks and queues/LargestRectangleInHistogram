@@ -1,0 +1,41 @@
+arr[i] * (right smaller - left smaller -1 ).
+
+pse and nse index with small changes -
+
+Time Complexity: O( N )
+
+Space Complexity: O(3N) where 3 is for the stack, left small array and a right small array
+
+int largestRectangleArea(vector<int>& heights) {
+        int n = heights.size();
+        stack<int> st;
+        int leftsmall[n], rightsmall[n];
+
+        for(int i = 0; i<n; i++){
+            while(!st.empty() && heights[st.top()] >= heights[i]){
+                st.pop();
+            }
+
+            leftsmall[i] = st.empty() ? 0 : st.top()+1;
+            st.push(i);
+        }
+
+        while(!st.empty()) st.pop();
+
+        for(int i = n-1; i>=0; i--){
+            while(!st.empty() && heights[st.top()] > heights[i]){
+                st.pop();
+            }
+
+            rightsmall[i] = st.empty() ? n-1 : st.top()-1;
+            st.push(i);
+        }
+
+        int ans = 0;
+        for(int i = 0; i<n; i++){
+            ans = max(ans, heights[i] * (rightsmall[i] - leftsmall[i] + 1));
+        }
+
+        return ans;
+    }
+};
