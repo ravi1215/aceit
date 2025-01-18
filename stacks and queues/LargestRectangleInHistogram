@@ -1,6 +1,6 @@
 arr[i] * (right smaller - left smaller -1 ).
 
-pse and nse index with small changes -
+pse and nse index  -
 
 Time Complexity: O( N )
 
@@ -16,7 +16,7 @@ int largestRectangleArea(vector<int>& heights) {
                 st.pop();
             }
 
-            leftsmall[i] = st.empty() ? 0 : st.top()+1;
+            leftsmall[i] = st.empty() ? -1 : st.top();
             st.push(i);
         }
 
@@ -27,13 +27,13 @@ int largestRectangleArea(vector<int>& heights) {
                 st.pop();
             }
 
-            rightsmall[i] = st.empty() ? n-1 : st.top()-1;
+            rightsmall[i] = st.empty() ? n : st.top();
             st.push(i);
         }
 
         int ans = 0;
         for(int i = 0; i<n; i++){
-            ans = max(ans, heights[i] * (rightsmall[i] - leftsmall[i] + 1));
+            ans = max(ans, heights[i] * (rightsmall[i] - leftsmall[i] - 1));
         }
 
         return ans;
