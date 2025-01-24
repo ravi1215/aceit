@@ -1,0 +1,28 @@
+unordered map mai val aur frequency daal
+
+next max heap main elements ko add karo pair banakar as in (frequency pehle, phir value)
+
+aur jabtak pq empty na ho jaaye aur k>0
+top element ki value ko result vector main push kardo
+
+vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int, int> mp;
+        for(int i = 0; i<nums.size(); i++){
+            mp[nums[i]]++;
+        }
+        priority_queue<pair<int, int>> pq;
+        for(auto i : mp){
+            pq.push({i.second,i.first});
+        }
+        vector<int> ans;
+        while(!pq.empty() && k>0){
+            pair<int, int> ele = pq.top();
+            pq.pop();
+            ans.push_back(ele.second);
+            k--;
+        }
+        return ans;
+    }
+
+TC: O(N LOG N)
+
