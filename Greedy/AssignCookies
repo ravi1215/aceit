@@ -1,0 +1,15 @@
+#include <iterator>
+#include <type_traits>
+sort karo greed aur cookies ke size ke array ko 
+
+2 pointer lo l aur r
+
+jabatak l<cookie.size and r<greed.size
+
+agar ( greed[r] <= cookie[l] to r++ )
+l++
+
+return r 
+
+TC : O(N logN + M logM + M)
+SC : O(1)

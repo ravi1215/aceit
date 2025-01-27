@@ -1,0 +1,14 @@
+TC: O(N)
+SC: O(1)
+
+works as arr[n] > arr[n-1] + arr[n-2] always, nhi to dpuse karte
+
+find min(int v, vector<int> den){
+  int cnt = 0;
+  for(int i = n-1; i>=0; i--){
+    while(v >= den[i]){
+        v -= den[i];
+        cnt++;
+    }
+    return cnt;
+}

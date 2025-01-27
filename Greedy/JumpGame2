@@ -1,0 +1,24 @@
+can be done using recursion brute force will give TLE, and Tc : O(N^N) exponential
+
+which later can be optimised using memoization or dynamic programming
+till O(N^2)
+
+using greedy - TC: O(N) and SC: O(1)
+
+if n<=1 return 0
+ya arr[0] == 0 return -1
+
+jumps = 0, l = 0, r = 0
+while(r < n-1)
+
+     farthest = 0
+     for ( i = l,  i<=r, i++)
+         farthest = max(i+arr[i], farthest)
+
+     if(farthest <= r) return -1
+
+     l = r+1
+     r = farthest
+     jumps++;
+
+return jumps
