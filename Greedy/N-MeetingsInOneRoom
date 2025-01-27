@@ -1,0 +1,43 @@
+if arr[0].end == freetime
+agar arr[i].start > freetime to meeting possible hai
+
+khudka data structure banana hai and comparator
+can ask you count tha number of meetings or the order, order ke case mai return karn dena vector ans ko
+
+TC : O(N) + O(NLogN) + O(N) 
+SC : O(3N) + O(N) agar order maanaga ho
+
+struct data{
+        int start;
+        int end;
+        int pos;
+    };
+    
+    bool static comp(const data val1, const data val2){
+        return val1.end < val2.end;
+    }
+    
+    int maxMeetings(vector<int>& start, vector<int>& end) {
+        int n =start.size();
+        data arr[n];
+        for(int i = 0; i<n; i++){
+            arr[i].start = start[i];
+            arr[i].end = end[i];
+            arr[i].pos = i+1;
+        }
+        
+        sort(arr, arr + n, comp);
+        
+        int cnt = 1, freetime = arr[0].end;
+        vector<int> ans = {arr[0].pos};
+        
+        for(int i = 0; i<n; i++){
+            if(arr[i].start > freetime){
+                cnt++;
+                freetime = arr[i].end;
+                ans.push_back(arr[i].pos);
+            }
+        }
+        
+        return cnt;
+    }
