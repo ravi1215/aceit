@@ -1,0 +1,19 @@
+easy just sort the arrival and departure time, maintain two variables i and j
+for arrival and depature time, a global maxcnt and local cnt and increment 
+cnt if 
+
+maxcnt = 0, cnt = 0, i = 0, j = 0
+
+sort(arr) and sort(dep)
+
+jabtak i < arr size
+
+    arr[i] <= dep[j] tab cnt++ and i++
+    nhi to cnt-- and j++
+
+maxcnt = max of (maxcnt and cnt)
+
+return maxcnt
+
+TC: 2 O(NlogN) + 2N
+SC: O(1)
