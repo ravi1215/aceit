@@ -1,0 +1,46 @@
+
+TC: O(NLOGN + N*MaxDeadline)
+SC: O(maxDeadline)
+
+keep a hash of (masdeadline+1, -1)
+
+struct data{
+        int ID;
+        int Deadline;
+        int Profit;
+    };
+    
+    bool static comp(const data &a, const data &b){
+        return a.Profit > b.Profit;
+    }
+    
+    vector<int> JobSequencing(vector<int> &id, vector<int> &deadline,
+                              vector<int> &profit) {
+        vector<data> arr;
+        int totalprofit = 0, cnt = 0, maxDeadline = -1;
+        
+        for(int i = 0; i<id.size(); i++){
+            arr.push_back({id[i], deadline[i], profit[i]});
+        }
+        
+        sort(arr.begin(), arr.end(), comp);
+        
+        for(int i = 0; i<arr.size(); i++){
+            maxDeadline = max(maxDeadline, arr[i].Deadline);
+        }
+        
+        vector<int> hash(maxDeadline+1, -1);
+        
+        for(int i = 0; i<arr.size(); i++){
+            for(int j = arr[i].Deadline; j>0; j--){
+                if(hash[j] == -1){
+                    cnt++;
+                    hash[j] = arr[i].ID;
+                    totalprofit += arr[i].Profit;
+                    break;
+                }
+            }
+        }
+        
+        return {cnt, totalprofit};
+    }
