@@ -1,0 +1,35 @@
+##DFS ->
+
+Preorder traversal : ROOT -> LEFT -> RIGHT
+Postorder traversal : LEFT -> RIGHT-> ROOT
+Inorder traversal : LEFT -> ROOT -> RIGHT
+
+##BFS ->
+
+Level order traversal : Moving on each level from left to right direction
+
+using queue data structure 
+
+vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        if(root == NULL) return ans;
+        queue<TreeNode*> q;
+        q.push(root);
+
+        while(!q.empty()){
+            int size = q.size();
+            vector<int> level;
+            for(int i = 0; i<size; i++){
+                TreeNode* node = q.front();
+                q.pop();
+                if(node->left != nullptr) q.push(node->left);
+                if(node->right != nullptr) q.push(node->right);
+                level.push_back(node->val);
+            }
+            ans.push_back(level);
+        }
+        return ans;
+    }
+
+TC: O(N) where N is the number of nodes in the binary tree.
+SC: O(N) In the worst case, the queue has to hold all the nodes of the last level of the binary tree, the last level could at most hold N/2 nodes
