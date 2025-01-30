@@ -1,0 +1,99 @@
+3 solutions -
+
+1st maintain 2 arrays left and right
+TC - O(3N)
+SC- O(2N)
+
+int n = ratings.size();
+        if (n == 0) return 0; // Edge case
+
+    vector<int> left(n, 1), right(n, 1);
+
+    // Left to right pass
+    for (int i = 1; i < n; i++) {
+        if (ratings[i] > ratings[i - 1]) {
+            left[i] = left[i - 1] + 1;
+        }
+    }
+
+    // Right to left pass
+    for (int i = n - 2; i >= 0; i--) {
+        if (ratings[i] > ratings[i + 1]) {
+            right[i] = right[i + 1] + 1;
+        }
+    }
+
+    // Calculate total candies
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += max(left[i], right[i]); // Take max of both directions
+    }
+
+    return sum;
+    }
+
+2nd Solution slightly optimised version - 
+TC - O(2N)
+SC- O(N)
+
+    int candy(vector<int>& ratings) {
+        int n = ratings.size();
+        if (n == 0) return 0; // Edge case
+
+    vector<int> left(n, 1);
+    int right = 1, sum = 0;
+
+    // Left to right pass
+    for (int i = 1; i < n; i++) {
+        if (ratings[i] > ratings[i - 1]) {
+            left[i] = left[i - 1] + 1;
+        }
+    }
+
+    // Right to left pass & calculate sum in one pass
+    for (int i = n - 1; i >= 0; i--) {
+        if (i < n - 1 && ratings[i] > ratings[i + 1]) {
+            right++;
+        } else {
+            right = 1;
+        }
+        sum += max(left[i], right);
+    }
+
+    return sum;
+    }
+
+3rd solution - optimal version - LC HARD
+
+it involves concept of slope, has to be done before attempting
+TC - O(N)
+SC- O(1)
+
+// concept of slope
+        int n = ratings.size();
+        int sum = 1, i = 1;
+        while(i<n){
+            if(ratings[i] == ratings[i-1]){
+                sum++;
+                i++;
+                continue;
+            }
+            int peak = 1; // upward slope
+            while(i<n && ratings[i] > ratings[i-1]){
+                peak++;
+                sum += peak;
+                i++;
+            }
+            int down = 1; // downward slope
+            while(i<n && ratings[i] < ratings[i-1]){
+                sum += down;
+                i++;
+                down++;
+            }
+
+            if(down > peak) sum += (down-peak);
+        }
+
+        return sum;
+    }
+
