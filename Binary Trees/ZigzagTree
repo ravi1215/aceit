@@ -1,0 +1,30 @@
+same as Level order traversal hai bas ek baar left to right print karo phir right to left
+TC and SC - O(N)
+
+vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        if(root == NULL) return ans;
+
+        queue<TreeNode*> q;
+        q.push(root);
+
+        bool ltor = true;
+
+        while(!q.empty()){
+            int size = q.size();
+            vector<int> row(size);
+            for(int i = 0; i<size; i++){
+                TreeNode* node = q.front();
+                q.pop();
+                int idx = ltor? i : (size-1-i);
+                row[idx] = node->val;
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+            }
+
+             ans.push_back(row);
+             ltor = !ltor; 
+        }
+
+        return ans;
+    }
