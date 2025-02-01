@@ -1,0 +1,22 @@
+use recursive solution - preorder(reverse)
+
+example for right side view - recursive(node->right) and then recursive(node->left)
+and for left side view - recursive(node->left) and then recursive(node->right)
+
+TC - O(N) WORST CASE
+SC - O(Height of tree) i.e. o(logN)
+
+void rightside(TreeNode* root, int level, vector<int>& ans){
+        if(root == nullptr) return;
+        if(level == ans.size()) ans.push_back(root->val);
+        rightside(root->right, level+1, ans);
+        rightside(root->left, level+1, ans);
+    }
+
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> ans;
+        rightside(root, 0, ans);
+        return ans;
+    }
+
+same ulta left side ke liye

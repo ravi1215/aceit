@@ -1,0 +1,34 @@
+
+do using level order traversel and concept of line
+
+same hai bottow view bas usme map ko line ke latest node value se update kar dete hai i.e. map[line] = node->data
+
+TC: O(N)
+SC : O(N/2 + N/2)
+
+same type of question - vertical order traversal (uses multiset)
+
+vector<int> topView(Node *root) {
+        vector<int> ans;
+        if(root == nullptr) return ans;
+        queue<pair<Node*, int>> q;
+        map<int,int> mp;
+        q.push({root, 0});
+        
+        while(!q.empty()){
+            auto it = q.front();
+            q.pop();
+            Node* node = it.first;
+            int line = it.second;
+            
+            if(mp.find(line) == mp.end()) mp[line] = node->data;
+            if(node->left) q.push({node->left, line-1});
+            if(node->right) q.push({node->right, line+1});
+        }
+        
+        for(auto it: mp){
+            ans.push_back(it.second);
+        }
+        
+        return ans;
+    }
