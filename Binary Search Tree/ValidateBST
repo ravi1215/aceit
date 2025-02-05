@@ -1,0 +1,12 @@
+using recursion 
+TC : O(n) AND SC : O(1)
+
+bool isvalid(TreeNode* root, long minval, long maxval){
+        if(root == nullptr) return true;
+        if(root->val >= maxval || root->val <= minval) return false;
+        return isvalid(root->left, minval, root->val) && isvalid(root->right, root->val, maxval);
+    }
+
+    bool isValidBST(TreeNode* root) {
+        return isvalid(root, LONG_MIN, LONG_MAX);
+    }
